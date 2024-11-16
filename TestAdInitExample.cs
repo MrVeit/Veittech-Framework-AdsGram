@@ -7,7 +7,7 @@ using UnigramAds.Utils;
 
 namespace UnigramAds.Demo
 {
-    public sealed class TestAdHandler : MonoBehaviour
+    public sealed class TestAdInitExample : MonoBehaviour
     {
         [SerializeField, Space] private Button _watchAdButton;
         [SerializeField] private Button _watchRewaardAdButton;

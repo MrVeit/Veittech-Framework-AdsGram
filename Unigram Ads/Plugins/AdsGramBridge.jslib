@@ -25,7 +25,7 @@ const adsGramBridge = {
                 this.AdsController = window.Adsgram.init(
                 { 
                     blockId: adUnit,
-                    debug: isTesting,
+                    debug: !!isTesting,
                     debugBannerType: debugMode
                 });
 

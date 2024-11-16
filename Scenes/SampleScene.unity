@@ -633,7 +633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 743732586}
-  - component: {fileID: 743732585}
+  - component: {fileID: 743732587}
   m_Layer: 0
   m_Name: TestAdView
   m_TagString: Untagged
@@ -641,21 +641,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &743732585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 743732584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb8f686dec184849bb10d0af2d520c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _watchAdButton: {fileID: 623477949}
-  _watchRewaardAdButton: {fileID: 820075090}
-  _fakeBalanceBar: {fileID: 971584998}
 --- !u!4 &743732586
 Transform:
   m_ObjectHideFlags: 0
@@ -671,6 +656,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &743732587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743732584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb8f686dec184849bb10d0af2d520c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _watchAdButton: {fileID: 623477949}
+  _watchRewaardAdButton: {fileID: 820075090}
+  _fakeBalanceBar: {fileID: 971584998}
 --- !u!1 &820075088
 GameObject:
   m_ObjectHideFlags: 0
