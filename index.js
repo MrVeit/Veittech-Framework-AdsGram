@@ -89,7 +89,7 @@
     Telegram.WebApp.ready();
     Telegram.WebApp.expand();
 
-    console.log("Telegram web app has been expanded to full screen");
+    console.log("Telegram Web App has been expanded to full screen");
 
     var version = Telegram.WebApp.version;
     var versionFloat = parseFloat(version);
