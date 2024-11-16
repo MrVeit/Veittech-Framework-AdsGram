@@ -41,8 +41,8 @@
   var buildUrl = "Build";
   var loaderUrl = buildUrl + "/Veittech-UnigramAds-WebBuild.loader.js";
   var config = {
-    dataUrl: buildUrl + "/1324468205529dccb67005d72b3c5d85.data.unityweb",
-    frameworkUrl: buildUrl + "/38783a57886a62d1e9be73570db6e885.js.unityweb",
+    dataUrl: buildUrl + "/bd193361da226fec0aeb8518ccf0cd42.data.unityweb",
+    frameworkUrl: buildUrl + "/3b28de0b54b16fc912f01e80220d3769.js.unityweb",
     codeUrl: buildUrl + "/835d10bd0eb9561e8c766dfd822321ab.wasm.unityweb",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "Veittech",
@@ -89,7 +89,7 @@
     Telegram.WebApp.ready();
     Telegram.WebApp.expand();
 
-    console.log("Telegram Web App has been expanded to full screen");
+    console.log("Telegram web app has been expanded to full screen");
 
     var version = Telegram.WebApp.version;
     var versionFloat = parseFloat(version);
