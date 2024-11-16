@@ -39,26 +39,15 @@
   }
 
   var buildUrl = "Build";
-  var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
+  var loaderUrl = buildUrl + "/Veittech-UnigramAds-WebBuild.loader.js";
   var config = {
-    dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
-    frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
-#if USE_THREADS
-    workerUrl: buildUrl + "/{{{ WORKER_FILENAME }}}",
-#endif
-#if USE_WASM
-    codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
-#endif
-#if MEMORY_FILENAME
-    memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
-#endif
-#if SYMBOLS_FILENAME
-    symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
-#endif
+    dataUrl: buildUrl + "/1324468205529dccb67005d72b3c5d85.data.unityweb",
+    frameworkUrl: buildUrl + "/38783a57886a62d1e9be73570db6e885.js.unityweb",
+    codeUrl: buildUrl + "/835d10bd0eb9561e8c766dfd822321ab.wasm.unityweb",
     streamingAssetsUrl: "StreamingAssets",
-    companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
-    productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
-    productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+    companyName: "Veittech",
+    productName: "Unigram Ads",
+    productVersion: "1.0",
     showBanner: unityShowBanner,
   };
 
@@ -71,9 +60,6 @@
     document.getElementsByTagName('head')[0].appendChild(meta);
   }
 
-#if BACKGROUND_FILENAME
-  canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
-#endif
   loadingBar.style.display = "block";
 
   var script = document.createElement("script");
