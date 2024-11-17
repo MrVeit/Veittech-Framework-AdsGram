@@ -23,26 +23,28 @@ namespace UnigramAds.Demo
 
         private void OnDestroy()
         {
-            var currentBalance = int.Parse(_fakeBalanceBar.text);
-
-            PlayerPrefs.SetInt(FAKE_BALANCE_SAVE_KEY, currentBalance);
-
             _watchAdButton.onClick.RemoveListener(WatchAd);
             _watchRewaardAdButton.onClick.RemoveListener(WatchRewardAd);
         }
 
         private void Start()
         {
-            var loadedBalance = PlayerPrefs.GetInt(FAKE_BALANCE_SAVE_KEY, 0);
+            if (PlayerPrefs.HasKey(FAKE_BALANCE_SAVE_KEY))
+            {
+                var loadedBalance = PlayerPrefs.GetInt(FAKE_BALANCE_SAVE_KEY);
 
-            SetBalance(loadedBalance);
+                Debug.Log($"Loaded balance: {loadedBalance}");
+
+                SetBalance(loadedBalance);
+            }
 
             _watchAdButton.onClick.AddListener(WatchAd);
             _watchRewaardAdButton.onClick.AddListener(WatchRewardAd);
 
-            _unigramAds = new UnigramAdsSDK.Builder("demo_inter", 
-                "demo_reward", "demo_banner")
-                .WithTestMode(AdTypes.RewardedVideo)
+            _unigramAds = new UnigramAdsSDK.Builder(
+                "demo_inter", "demo_reward", "demo_banner")
+                .WithTestMode()
+                .WithAdNetwork(AdNetworkTypes.AdSonar)
                 .Build((isSuccess) =>
                 {
                     Debug.Log($"Sdk initialized with status: {isSuccess}");
@@ -81,6 +83,11 @@ namespace UnigramAds.Demo
             _fakeBalanceBar.text = amount.ToString();
         }
 
+        private void SaveBalance(int amount)
+        {
+            PlayerPrefs.SetInt(FAKE_BALANCE_SAVE_KEY, amount);
+        }
+
         private void OnRewardAdFinished()
         {
             Debug.Log("Ad watched, start fetching reward");
@@ -94,6 +101,7 @@ namespace UnigramAds.Demo
             Debug.Log($"Updated balance: {currentBalance}");
 
             SetBalance(currentBalance);
+            SaveBalance(currentBalance);
         }
     }
 }

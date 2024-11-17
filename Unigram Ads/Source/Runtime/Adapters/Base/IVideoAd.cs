@@ -9,13 +9,7 @@ namespace UnigramAds.Core.Adapters
 
         virtual void Destroy(string adUnit) { }
 
-        event Action OnShowStarted;
         event Action OnShowFinished;
-
         event Action<string> OnShowFailed;
-        event Action OnSkipped;
-
-        event Action OnNotAvailable;
-        event Action OnShowSpamDetected;
     }
 }
