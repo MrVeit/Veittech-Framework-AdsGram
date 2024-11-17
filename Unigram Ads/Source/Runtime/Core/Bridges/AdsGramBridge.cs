@@ -11,7 +11,7 @@ namespace UnigramAds.Core.Bridge
     {
 #region NATIVE_METHODS
         [DllImport("__Internal")]
-        private static extern void Init(string appId, 
+        private static extern void InitAdsGram(string appId, 
             bool isTesting, string testingType, Action<int> sdkInitialized);
 
         [DllImport("__Internal")]
@@ -114,7 +114,7 @@ namespace UnigramAds.Core.Bridge
 
             var targetType = AvailableAdTypes.GetAdByType(testingType);
 
-            Init(adUnitId, isTesting, targetType, OnInitialize);
+            InitAdsGram(adUnitId, isTesting, targetType, OnInitialize);
         }
 
         internal static void Init(string adUnitId,
@@ -124,7 +124,7 @@ namespace UnigramAds.Core.Bridge
 
             var targetType = AvailableAdTypes.GetAdByType(AdTypes.FullscreenStatic);
 
-            Init(adUnitId, false, targetType, OnInitialize);
+            InitAdsGram(adUnitId, false, targetType, OnInitialize);
         }
 
         internal static void ShowAd(Action adShown,

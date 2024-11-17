@@ -1,17 +1,17 @@
 const adSonarBridge = {
     $adSonar: {
-        AdsController: null,
+        AdsSonarController: null,
 
-        isAvailableSDK: function()
+        isAvailableAdsSonar: function()
         {
-            return !!this.AdsController;
+            return !!this.AdsSonarController;
         },
 
-        init: function(callback)
+        initAdSonar: function(callback)
         {
-            AdsController = window.Sonar;
+            AdsSonarController = window.Sonar;
 
-            if (!this.isAvailableSDK())
+            if (!this.isAvailableAdsSonar())
             {
                 console.warn(`Failed to initialize Ad Sonar bridge`);
 
@@ -27,7 +27,7 @@ const adSonarBridge = {
 
         showAd: function(adUnit, successCallback, errorCallback)
         {
-            if (!this.isAvailableSDK())
+            if (!this.isAvailableAdsSonar())
             {
                 console.warn('Ad Sonar sdk is not initialized');
 
@@ -36,7 +36,7 @@ const adSonarBridge = {
 
             const adPlacement = UTF8ToString(adUnit);
 
-            AdsController.show({ adUnit: adPlacement }).then((result) =>
+            AdsSonarController.show({ adUnit: adPlacement }).then((result) =>
             {
                 if (result.status === 'error')
                 {
@@ -69,7 +69,7 @@ const adSonarBridge = {
 
         removeAd: function(adUnit, successCallback, errorCallback)
         {
-            if (!this.isAvailableSDK())
+            if (!this.isAvailableAdsSonar())
             {
                 console.warn(`Ad Sonar sdk is not initialized`);
 
@@ -78,7 +78,7 @@ const adSonarBridge = {
 
             const adPlacement = UTF8ToString(adUnit);
 
-            AdsController.remove({ adUnit: adUnit }).then((result) =>
+            AdsSonarController.remove({ adUnit: adUnit }).then((result) =>
             {   
                 if (result.status === 'error')
                 {
@@ -110,9 +110,9 @@ const adSonarBridge = {
         }
     },
 
-    Init: function(callback)
+    InitAdSonar: function(callback)
     {
-        adSonar.init(callback);
+        adSonar.initAdSonar(callback);
     },
 
     ShowAd: function(adUnit, adShown, adShowFailed)

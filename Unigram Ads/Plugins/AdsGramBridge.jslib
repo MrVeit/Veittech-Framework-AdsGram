@@ -1,19 +1,19 @@
 const adsGramBridge = {
     $adsGram: {
-        AdsController: null,
+        AdsGramController: null,
 
-        isAvailableSDK: function()
+        isAvailableAdsGram: function()
         {
-            return !!this.AdsController;
+            return !!this.AdsGramController;
         },
 
-        init: function(appId, 
+        initAdsGram: function(appId, 
             isTesting, testingType, callback)
         {
             const adUnit = UTF8ToString(appId);
             const debugMode = UTF8ToString(testingType);
 
-            if (this.AdsController)
+            if (this.AdsGramController)
             {
                 console.warn('Sdk already initialized');
 
@@ -22,7 +22,7 @@ const adsGramBridge = {
 
             try
             {
-                this.AdsController = window.Adsgram.init(
+                this.AdsGramController = window.Adsgram.init(
                 { 
                     blockId: adUnit,
                     debug: !!isTesting,
@@ -41,7 +41,7 @@ const adsGramBridge = {
 
         showRewardAd: function(successCallback, errorCallback)
         {
-            if (!this.isAvailableSDK())
+            if (!this.isAvailableAdsGram())
             {
                 const reasonPtr = allocate(intArrayFromString(
                     "SDK_NOT_INITIALIZED"), 'i8', ALLOC_NORMAL);
@@ -53,7 +53,7 @@ const adsGramBridge = {
                 return;
             }
 
-            this.AdsController.show().then((result) =>
+            this.AdsGramController.show().then((result) =>
             {
                 if (result.done)
                 {
@@ -88,25 +88,25 @@ const adsGramBridge = {
 
         destroyRewardAd: function()
         {
-            if (!this.isAvailableSDK())
+            if (!this.isAvailableAdsGram())
             {
                 console.warn(`Sdk is not initialized`);
 
                 return;
             }
 
-            this.AdsController.destroy();
+            this.AdsGramController.destroy();
         },
 
         addListener: function(eventType, callback)
         {
-            if (this.isAvailableSDK())
+            if (this.isAvailableAdsGram())
             {
                 const eventId = UTF8ToString(eventType);
                 const eventIdPtr = allocate(intArrayFromString(
                     eventId), 'i8', ALLOC_NORMAL);
 
-                this.AdsController.addEventListener(eventId, function ()
+                this.AdsGramController.addEventListener(eventId, function ()
                 {
                     console.log(`Invoked event with id: ${eventId}`);
 
@@ -119,13 +119,13 @@ const adsGramBridge = {
 
         removeListener: function(eventType, callback)
         {
-            if (this.isAvailableSDK())
+            if (this.isAvailableAdsGram())
             {
                 const eventId = UTF8ToString(eventType);
                 const eventIdPtr = allocate(intArrayFromString(
                     eventId), 'i8', ALLOC_NORMAL);
 
-                this.AdsController.removeEventListener(
+                this.AdsGramController.removeEventListener(
                     UTF8ToString(eventType), function ()
                 {
                     console.log(`Unsubscribed from event with id: ${eventId}`);
@@ -138,10 +138,10 @@ const adsGramBridge = {
         }
     },
 
-    Init: function(appId, 
+    InitAdsGram: function(appId, 
         isTesting, testingType, callback)
     {
-        adsGram.init(appId, isTesting, testingType, callback);
+        adsGram.initAdsGram(appId, isTesting, testingType, callback);
     },
 
     ShowRewardAd: function(adShown, adShowFailed)

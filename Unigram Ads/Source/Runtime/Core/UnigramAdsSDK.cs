@@ -68,11 +68,9 @@ namespace UnigramAds.Core
                 this.AppId = appId;
             }
 
-            public Builder(string appId, string interAdUnit,
+            public Builder(string interAdUnit,
                 string rewardAdUnit, string bannerAdUnit)
             {
-                this.AppId = appId;
-
                 this.InterstitialAdUnit = interAdUnit;
                 this.RewardedAdUnit = rewardAdUnit;
                 this.BannerAdUnit = bannerAdUnit;
@@ -114,9 +112,10 @@ namespace UnigramAds.Core
                 AdsGramBridge.Init(AppId, IsTestMode,
                     DebugAdType, (isSuccess) =>
                 {
-                    initializationFnished?.Invoke(isSuccess);
-
-                    IsInitialized = isSuccess;
+                    if (isSuccess)
+                    {
+                        UnigramAdsLogger.Log("Ads Gram is initialized");
+                    }
                 });
                 */
 
@@ -125,6 +124,11 @@ namespace UnigramAds.Core
                     initializationFinished?.Invoke(isSuccess);
 
                     IsInitialized = isSuccess;
+
+                    if (IsInitialized)
+                    {
+                        UnigramAdsLogger.Log("Ad Sonar is initialized");
+                    }
                 });
 
                 _instance = new UnigramAdsSDK(this);

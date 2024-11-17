@@ -10,7 +10,7 @@ namespace UnigramAds.Core.Bridge
     {
 #region NATIVE_METHODS
         [DllImport("__Internal")]
-        private static extern void Init(Action<int> sdkinitialized);
+        private static extern void InitAdSonar(Action<int> sdkinitialized);
 
         [DllImport("__Internal")]
         private static extern void ShowAd(string adUnit,
@@ -88,7 +88,7 @@ namespace UnigramAds.Core.Bridge
         {
             OnInitialized = sdkInitialized;
 
-            Init(OnInitialize);
+            InitAdSonar(OnInitialize);
         }
 
         internal static void ShowRewardAd(string adUnit,
