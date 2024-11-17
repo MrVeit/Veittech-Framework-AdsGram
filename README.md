@@ -9,6 +9,10 @@
 
 **UNIGRAM ADS** is a library for displaying native ads in Unity mini-apps inside Telegram.
 
+# Technical Demo
+
+You can test the SDK without installation on a demo app [in your browser](https://mrveit.github.io/Veittech-UnigramAds/) or directly [in the TMA (Telegram Mini App)](https://t.me/UnigramAds_bot/start).
+
 # Supported Ad Networks
 
 |           Network       |   Status   |               Ad Types             |
