@@ -9,7 +9,7 @@ const adSonarBridge = {
 
         initAdSonar: function(callback)
         {
-            AdsSonarController = window.Sonar;
+            this.AdsSonarController = window.Sonar;
 
             if (!this.isAvailableAdsSonar())
             {
@@ -36,7 +36,7 @@ const adSonarBridge = {
 
             const adPlacement = UTF8ToString(adUnit);
 
-            AdsSonarController.show({ adUnit: adPlacement }).then((result) =>
+            this.AdsSonarController.show({ adUnit: adPlacement }).then((result) =>
             {
                 if (result.status === 'error')
                 {
@@ -78,7 +78,7 @@ const adSonarBridge = {
 
             const adPlacement = UTF8ToString(adUnit);
 
-            AdsSonarController.remove({ adUnit: adUnit }).then((result) =>
+            this.AdsSonarController.remove({ adUnit: adUnit }).then((result) =>
             {   
                 if (result.status === 'error')
                 {
