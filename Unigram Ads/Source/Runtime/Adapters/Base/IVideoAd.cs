@@ -7,6 +7,8 @@ namespace UnigramAds.Core.Adapters
         void Show();
         void Destroy();
 
+        virtual void Destroy(string adUnit) { }
+
         event Action OnShowStarted;
         event Action OnShowFinished;
 

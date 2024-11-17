@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using AOT;
 using UnigramAds.Common;
+using UnigramAds.Utils;
 
 namespace UnigramAds.Core.Bridge
 {
@@ -15,7 +16,7 @@ namespace UnigramAds.Core.Bridge
 
         [DllImport("__Internal")]
         private static extern void ShowRewardAd(
-            Action adShown, Action<string> shownAdFailed);
+            Action adShown, Action<string> showAdFailed);
 
         [DllImport("__Internal")]
         private static extern void DestroyRewardAd();
@@ -33,7 +34,7 @@ namespace UnigramAds.Core.Bridge
         [MonoPInvokeCallback(typeof(Action<int>))]
         private static void OnInitialize(int statusCode)
         {
-            var isSuccess = IsSuccess(statusCode);
+            var isSuccess = UnigramUtils.IsSuccess(statusCode);
 
             if (isSuccess)
             {
@@ -138,16 +139,6 @@ namespace UnigramAds.Core.Bridge
         internal static void DestroyAd()
         {
             DestroyRewardAd();
-        }
-
-        private static bool IsSuccess(int statusCode)
-        {
-            if (statusCode == 1)
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }

@@ -14,5 +14,15 @@ namespace UnigramAds.Utils
 #endif
             return true;
         }
+
+        internal static bool IsSuccess(int statusCode)
+        {
+            if (statusCode == 1)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

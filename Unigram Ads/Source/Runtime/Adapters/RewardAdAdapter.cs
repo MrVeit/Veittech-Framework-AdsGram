@@ -18,6 +18,7 @@ namespace UnigramAds.Core.Adapters
 
         public RewardAdAdapter()
         {
+            /*
             AdsGramBridge.SubscribeToEvent(
                 AdEventsTypes.Started, (eventType) =>
             {
@@ -49,6 +50,7 @@ namespace UnigramAds.Core.Adapters
 
                 OnShowSpamDetected?.Invoke();
             });
+            */
         }
 
         public void Show()
@@ -63,6 +65,7 @@ namespace UnigramAds.Core.Adapters
 
         public void Show(Action adFinished)
         {
+            /*
             AdsGramBridge.ShowAd(() =>
             {
                 UnigramAdsLogger.Log("Current reward ad shown");
@@ -75,15 +78,48 @@ namespace UnigramAds.Core.Adapters
 
                 OnShowFailed?.Invoke(errorMessage);
             });
+            */
+
+            var rewardAdUnit = UnigramAdsSDK.Instance.RewardedAdUnit;
+
+            AdSonarBridge.ShowRewardAd(rewardAdUnit, () =>
+            {
+                UnigramAdsLogger.Log("Current ad shown");
+
+                adFinished?.Invoke();
+
+                OnShowFinished?.Invoke();
+            },
+            (errorMessage) =>
+            {
+                UnigramAdsLogger.LogWarning("Failed to shown current ad");
+
+                OnShowFailed?.Invoke(errorMessage);
+            });
         }
 
         public void Destroy()
         {
-            AdsGramBridge.DestroyAd();
+            //AdsGramBridge.DestroyAd();
+        }
+
+        public void Destroy(string adUnit)
+        {
+            var rewardAdUnit = UnigramAdsSDK.Instance.RewardedAdUnit;
+
+            AdSonarBridge.RemoveAdUnit(rewardAdUnit, () =>
+            {
+                UnigramAdsLogger.Log($"Ad unit {rewardAdUnit} removed");
+            },
+            (errorMessage) =>
+            {
+                UnigramAdsLogger.LogWarning($"Failed to remove ad unit {rewardAdUnit}");
+            });
         }
 
         public void Dispose()
         {
+            /*
             AdsGramBridge.UnSubscribeFromEvent(
                 AdEventsTypes.Started, (eventType) =>
             {
@@ -107,6 +143,7 @@ namespace UnigramAds.Core.Adapters
             {
                 UnigramAdsLogger.Log($"Current ad unsubscribed by {eventType} event");
             });
+            */
         }
     }
 }

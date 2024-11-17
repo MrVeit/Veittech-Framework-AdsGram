@@ -7,8 +7,33 @@ namespace UnigramAds.Core
 {
     public sealed class UnigramAdsSDK
     {
+        private static UnigramAdsSDK _instance;
+
+        public static UnigramAdsSDK Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (typeof(UnigramAdsSDK))
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new UnigramAdsSDK(null);
+                        }
+                    }
+                }
+
+                return _instance;
+            }
+        }
+
         public string AppId { get; private set; }
-    
+
+        public string InterstitialAdUnit { get; private set; }
+        public string RewardedAdUnit { get; private set; }
+        public string BannerAdUnit { get; private set; }
+
         public bool IsInitialized { get; private set; }
         public bool IsTestMode { get; private set; }
 
@@ -18,11 +43,20 @@ namespace UnigramAds.Core
         {
             this.IsInitialized = builder.IsInitialized;
             this.IsTestMode = builder.IsTestMode;
+
+            this.AppId = builder.AppId;
+            this.InterstitialAdUnit = builder.InterstitialAdUnit;
+            this.RewardedAdUnit = builder.RewardedAdUnit;
+            this.BannerAdUnit = builder.BannerAdUnit;
         }
 
         public sealed class Builder
         {
             internal string AppId { get; private set; }
+
+            internal string InterstitialAdUnit { get; private set; }
+            internal string RewardedAdUnit { get; private set; }
+            internal string BannerAdUnit { get; private set; }
 
             internal bool IsInitialized { get; private set; }
             internal bool IsTestMode { get; private set; }
@@ -32,6 +66,16 @@ namespace UnigramAds.Core
             public Builder(string appId)
             {
                 this.AppId = appId;
+            }
+
+            public Builder(string appId, string interAdUnit,
+                string rewardAdUnit, string bannerAdUnit)
+            {
+                this.AppId = appId;
+
+                this.InterstitialAdUnit = interAdUnit;
+                this.RewardedAdUnit = rewardAdUnit;
+                this.BannerAdUnit = bannerAdUnit;
             }
 
             public Builder WithTestMode(AdTypes adType)
@@ -54,25 +98,38 @@ namespace UnigramAds.Core
                 return this;
             }
 
-            public UnigramAdsSDK Build(Action<bool> initializationFnished)
+            public Builder WithAdNetwork()
+            {
+                return this;
+            }
+
+            public UnigramAdsSDK Build(Action<bool> initializationFinished)
             {
                 if (!UnigramUtils.IsSupporedPlatform())
                 {
                     return null;
                 }
 
+                /*
                 AdsGramBridge.Init(AppId, IsTestMode,
                     DebugAdType, (isSuccess) =>
                 {
                     initializationFnished?.Invoke(isSuccess);
 
-                    if (isSuccess)
-                    {
-                        IsInitialized = true;
-                    }
+                    IsInitialized = isSuccess;
+                });
+                */
+
+                AdSonarBridge.Init((isSuccess) =>
+                {
+                    initializationFinished?.Invoke(isSuccess);
+
+                    IsInitialized = isSuccess;
                 });
 
-                return new UnigramAdsSDK(this);
+                _instance = new UnigramAdsSDK(this);
+
+                return _instance;
             }
         }
     }
