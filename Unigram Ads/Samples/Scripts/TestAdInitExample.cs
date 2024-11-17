@@ -80,7 +80,7 @@ namespace UnigramAds.Demo
 
         private void SetBalance(int amount)
         {
-            _fakeBalanceBar.text = amount.ToString();
+            _fakeBalanceBar.text = $"{amount} Coins";
         }
 
         private void SaveBalance(int amount)
