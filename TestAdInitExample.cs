@@ -40,7 +40,7 @@ namespace UnigramAds.Demo
             _watchAdButton.onClick.AddListener(WatchAd);
             _watchRewaardAdButton.onClick.AddListener(WatchRewardAd);
 
-            _unigramAds = new UnigramAdsSDK.Builder("4655")
+            _unigramAds = new UnigramAdsSDK.Builder("5324")
                 .WithTestMode(AdTypes.RewardedVideo)
                 .Build((isSuccess) =>
                 {
