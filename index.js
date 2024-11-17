@@ -42,7 +42,7 @@
   var loaderUrl = buildUrl + "/Veittech-UnigramAds-WebBuild.loader.js";
   var config = {
     dataUrl: buildUrl + "/bf652b2f1be013242b289583f2382ce0.data.unityweb",
-    frameworkUrl: buildUrl + "/3bd9a93ce6b7f13d7fd5fea015c61675.js.unityweb",
+    frameworkUrl: buildUrl + "/a3c18bed02b2a60549d63704e621a857.js.unityweb",
     codeUrl: buildUrl + "/73450aec3fee83c75facc55ff6b204c8.wasm.unityweb",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "Veittech",
